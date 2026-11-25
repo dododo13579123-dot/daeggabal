@@ -411,9 +411,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   z-index: 1;
   font-weight: 900;
   font-size: clamp(38px, 4.5vw, 55px);
-  line-height: 1.17;
-  letter-spacing: -0.062em;
-  transform: skewX(-4deg);
+  line-height: 1.2;
+  letter-spacing: -0.055em;
+  transform: skewX(-3deg);
   transform-origin: left center;
   margin-top: 8px;
 }
@@ -424,9 +424,11 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   text-shadow: 5px 5px 0 rgba(140, 13, 24, 0.45);
 }
 .poster__title .stroke {
-  color: var(--bone);
-  -webkit-text-fill-color: var(--bone);
-  -webkit-text-stroke: 0;
+  color: transparent;
+  -webkit-text-fill-color: #0b0b10;
+  -webkit-text-stroke: 1.4px var(--bone);
+  letter-spacing: -0.02em;
+  font-weight: 800;
 }
 .poster__bottom {
   position: relative;
