@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://dododo13579123-dot.github.io/daeggabal/sitemap.xml

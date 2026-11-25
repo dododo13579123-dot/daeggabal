@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>발로란트 내전 팀 밸런서 · 자동 팀 짜기·대진표·포인트 정산 | 대깨발</title>
+<meta name="description" content="발로란트 내전 팀 밸런서. 닉네임과 티어만 넣으면 2~8팀 자동 밸런싱, 토너먼트 대진표(부전승 자동), 포인트 정산까지 한 번에. 설치 없이 무료, 디스코드 전송 지원.">
+<meta name="keywords" content="발로란트 내전, 발로란트 팀 밸런서, 내전 팀 짜기, 발로란트 팀 나누기, 발로란트 대진표, 내전 포인트, 발로란트 커스텀 내전">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#07070a">
+<link rel="canonical" href="https://dododo13579123-dot.github.io/daeggabal/balancer.html">
+<meta name="naver-site-verification" content="NAVER_SEARCH_ADVISOR_CODE">
+<meta name="google-site-verification" content="GOOGLE_SEARCH_CONSOLE_CODE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="대가리 깨져도 발로란트">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="발로란트 내전 팀 밸런서 · 자동 팀 짜기">
+<meta property="og:description" content="티어만 넣으면 팀 자동 구성, 대진표 자동 생성, 포인트 자동 정산. 설치 없이 무료.">
+<meta property="og:url" content="https://dododo13579123-dot.github.io/daeggabal/balancer.html">
+<meta property="og:image" content="https://dododo13579123-dot.github.io/daeggabal/assets/img/og-balancer.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.png" sizes="64x64">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/balancer.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "대깨발 내전 팀 밸런서",
+      "url": "https://dododo13579123-dot.github.io/daeggabal/balancer.html",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "ko-KR",
+      "description": "발로란트 내전 참가자의 티어와 RR을 입력하면 팀 자동 밸런싱, 토너먼트 대진표, 포인트 정산을 제공하는 무료 웹 도구입니다.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+      "featureList": [
+        "2~8팀 자동 밸런싱",
+        "현재 티어·최고 티어 반영 비중 조절",
+        "부전승을 지원하는 토너먼트 대진표 자동 생성",
+        "승자 자동 진출 및 우승팀 판정",
+        "포인트 자동 정산",
+        "디스코드 웹훅 전송",
+        "결과 링크 공유 및 CSV 내보내기"
+      ],
+      "publisher": { "@type": "Organization", "name": "대가리 깨져도 발로란트", "url": "https://dododo13579123-dot.github.io/daeggabal/" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://dododo13579123-dot.github.io/daeggabal/" },
+        { "@type": "ListItem", "position": 2, "name": "내전 밸런서", "item": "https://dododo13579123-dot.github.io/daeggabal/balancer.html" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로가기</a>
+
+<header class="site-header">
+  <div class="wrap header__inner">
+    <a class="brand" href="index.html" aria-label="대가리 깨져도 발로란트 홈">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M2 3h9.4l8.7 21.4H11L2 3Z" fill="currentColor"/>
+        <path d="M18.6 3H30l-5.4 13.4L18.6 3Z" fill="currentColor"/>
+      </svg>
+      <span class="brand__text"><strong>대깨발</strong><small>대가리 깨져도 발로란트</small></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="주요 메뉴">
+      <a href="duo.html">듀오 찾기</a>
+      <a href="balancer.html">밸런서</a>
+      <a href="season.html">시즌</a>
+      <a href="events.html">대회</a>
+      <a href="rules.html">규칙</a>
+      <a href="blog/index.html">가이드</a>
+      <a href="faq.html">FAQ</a>
+      <a class="btn btn--primary btn--sm nav__cta" href="https://discord.gg/76CTQ5Cpb9" target="_blank" rel="noopener">디스코드 참가</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav"><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="현재 위치">
+        <a href="index.html">홈</a> <span aria-hidden="true">/</span> <span aria-current="page">내전 밸런서</span>
+      </nav>
+      <h1>발로란트 내전<br><span style="color:var(--red)">팀 밸런서</span></h1>
+      <p>티어와 RR만 넣으면 팀이 자동으로 짜이고, 대진표와 포인트 정산까지 한 번에 끝납니다. 설치도, 회원가입도 없습니다.</p>
+      <div class="hero__meta" style="margin-top:18px">
+        <span><i class="dot"></i>100% 무료</span>
+        <span>2~8팀 지원</span>
+        <span>부전승 자동 처리</span>
+        <span>자동 저장</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-page">
+    <div class="wrap">
+      <div class="tool">
+        <div class="tool__head">
+          <div class="tool__title">
+            <span>⚙️ 내전 운영 콘솔</span>
+            <span class="badge-live">AUTO</span>
+          </div>
+          <div class="tool__meta">
+            <span>참가 <b id="stat-players">0</b>명</span>
+            <span>팀 <b id="stat-teams">0</b>개</span>
+            <span>평균 <b id="stat-avg">0</b> MMR</span>
+          </div>
+        </div>
+
+        <div class="tool__body">
+          <div class="tool__layout">
+            <!-- ROSTER -->
+            <div>
+              <div class="pnl">
+                <div class="pnl__head">
+                  <h2>참가자 명단</h2>
+                  <span style="font-size:11px;color:#7f7f8b">현재 티어 · 최고 티어 가중 합산</span>
+                </div>
+                <div class="toolbar">
+                  <button class="btn btn--primary btn--xs" type="button" id="add-player">+ 참가자 추가</button>
+                  <button class="btn btn--dark btn--xs" type="button" id="demo-btn">데모 10명</button>
+                  <button class="btn btn--line btn--xs" type="button" id="clear-btn">전체 삭제</button>
+                  <button class="btn btn--dark btn--xs" type="button" id="balance-btn-top">밸런스 실행</button>
+                  <span class="spacer"></span>
+                  <span class="hint" style="margin:0">브라우저에 자동 저장됩니다</span>
+                </div>
+                <div class="pnl__body pnl__body--flush">
+                  <div class="roster-wrap">
+                    <table class="roster">
+                      <thead>
+                        <tr>
+                          <th class="col-no">#</th>
+                          <th>닉네임</th>
+                          <th>현재 티어</th>
+                          <th>RR</th>
+                          <th>최고 티어</th>
+                          <th>RR</th>
+                          <th style="text-align:right">MMR</th>
+                          <th style="text-align:center">참가</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody id="roster-body"></tbody>
+                    </table>
+                  </div>
+                  <details class="import-box">
+                    <summary>명단 붙여넣기 · CSV 불러오기</summary>
+                    <div class="import-box__body">
+                      <textarea id="import-text" class="input input--mono" rows="5" placeholder="닉네임,티어,RR,최고티어,최고RR&#10;예) 대가리깨짐,레디언트,62,레디언트,88&#10;예) 제트장인,불멸3,41&#10;예) 플래탈출 플래티넘2 80 (공백 구분도 가능)"></textarea>
+                      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px">
+                        <button class="btn btn--dark btn--xs" type="button" id="import-btn">명단 불러오기</button>
+                        <span class="hint" style="margin:0">한 줄에 한 명 · 티어를 못 읽은 줄은 건너뜁니다.</span>
+                      </div>
+                    </div>
+                  </details>
+                </div>
+              </div>
+
+              <div id="result" aria-live="polite"></div>
+            </div>
+
+            <!-- SETTINGS -->
+            <aside class="pnl">
+              <div class="pnl__head"><h2>매칭 설정</h2></div>
+              <div class="pnl__body">
+                <div class="field">
+                  <label for="team-count">팀 개수 <span class="field__val">2 ~ 8</span></label>
+                  <div class="stepper">
+                    <button type="button" data-teams="dec" aria-label="팀 수 줄이기">−</button>
+                    <input id="team-count" type="number" value="2" min="2" max="8" readonly aria-label="팀 개수">
+                    <button type="button" data-teams="inc" aria-label="팀 수 늘리기">+</button>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="team-size">팀당 인원 <span class="field__val">2 ~ 10</span></label>
+                  <div class="stepper">
+                    <button type="button" data-size="dec" aria-label="팀당 인원 줄이기">−</button>
+                    <input id="team-size" type="number" value="5" min="2" max="10" readonly aria-label="팀당 인원">
+                    <button type="button" data-size="inc" aria-label="팀당 인원 늘리기">+</button>
+                  </div>
+                  <p class="hint">정원보다 참가자가 많으면 팀이 자동으로 균등 배분됩니다.</p>
+                </div>
+
+                <div class="field">
+                  <label for="weight">현재 티어 반영 비중 <span class="field__val" id="weight-val">60%</span></label>
+                  <input class="range" id="weight" type="range" min="0" max="100" value="60" step="5" style="--fill:60%" aria-label="현재 티어 반영 비중">
+                  <div class="range-legend"><span>최고 티어 100%</span><span>현재 티어 100%</span></div>
+                  <p class="hint">부캐·복귀 유저가 많다면 최고 티어 비중을 높여 보세요.</p>
+                </div>
+
+                <div class="field">
+                  <label class="switch">
+                    <span>자동 리밸런스</span>
+                    <input type="checkbox" id="auto-balance" checked>
+                    <span class="switch__track"></span>
+                  </label>
+                  <p class="hint">명단·티어가 바뀌면 팀을 자동으로 다시 짭니다.</p>
+                </div>
+
+                <button class="btn btn--primary btn--block" type="button" id="balance-btn" style="margin-top:4px">밸런스 실행</button>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                  <button class="btn btn--dark btn--xs" type="button" id="reroll-btn" style="flex:1">다시 섞기</button>
+                  <button class="btn btn--dark btn--xs" type="button" id="reset-bracket" style="flex:1">대진표 초기화</button>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <!-- BRACKET -->
+          <div class="pnl" style="margin-top:18px" id="bracket-panel">
+            <div class="pnl__head">
+              <h3>🏆 토너먼트 대진표</h3>
+              <span style="font-size:11px;color:#7f7f8b">스코어 입력 → 승자 자동 진출</span>
+            </div>
+            <div class="pnl__body">
+              <p class="hint" style="margin:0 0 14px">각 경기의 <b>맵 스코어</b>를 입력하세요. 예) 2 : 1 → 3경기로 집계. 부전승은 자동으로 다음 라운드에 진출합니다.</p>
+              <div id="bracket-box"></div>
+            </div>
+          </div>
+
+          <!-- POINTS -->
+          <div class="pnl" style="margin-top:18px">
+            <div class="pnl__head" style="flex-wrap:wrap;gap:10px">
+              <h3>💰 포인트 정산</h3>
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;color:#8d8d9a">
+                <span>참여 <input class="input" data-rule="play" type="number" value="150" min="0" style="width:64px;padding:5px 8px;font-size:12px;text-align:center"> P</span>
+                <span>승리 <input class="input" data-rule="win" type="number" value="70" min="0" style="width:64px;padding:5px 8px;font-size:12px;text-align:center"> P</span>
+              </div>
+            </div>
+            <div class="pnl__body pnl__body--flush">
+              <div id="points-box"></div>
+            </div>
+            <div style="padding:0 16px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+              <button class="btn btn--primary btn--sm" type="button" id="apply-season">시즌에 반영</button>
+              <a class="btn btn--line btn--sm" href="season.html">시즌 랭킹 보기</a>
+              <span class="hint" style="margin:0" id="apply-season-note">정산 포인트를 시즌 기록에 적립합니다.</span>
+            </div>
+          </div>
+
+          <!-- SHARE -->
+          <div class="tool__layout" style="margin-top:18px">
+            <div class="pnl">
+              <div class="pnl__head"><h3>📤 결과 공유 · 내보내기</h3></div>
+              <div class="pnl__body">
+                <div class="share">
+                  <div class="share__row">
+                    <button class="btn btn--dark btn--sm" type="button" id="copy-result">결과 텍스트 복사</button>
+                    <button class="btn btn--dark btn--sm" type="button" id="share-btn">공유 링크 복사</button>
+                    <button class="btn btn--dark btn--sm" type="button" id="csv-btn">CSV 저장</button>
+                  </div>
+                  <p class="hint">공유 링크에는 명단과 팀 구성이 담깁니다. 링크를 연 사람은 같은 화면을 그대로 복원합니다.</p>
+                </div>
+              </div>
+            </div>
+            <div class="pnl">
+              <div class="pnl__head"><h3>🤖 디스코드 자동 전송</h3></div>
+              <div class="pnl__body">
+                <div class="share">
+                  <input class="input input--mono" id="webhook-url" type="url" placeholder="https://discord.com/api/webhooks/..." aria-label="디스코드 웹훅 URL">
+                  <button class="btn btn--primary btn--sm" type="button" id="send-discord">디스코드로 전송</button>
+                  <p class="hint">채널 설정 → 연동 → 웹훅에서 URL을 복사해 붙여넣으세요. 팀 구성과 포인트가 임베드로 전송됩니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="notice" style="margin-top:18px">
+            <span aria-hidden="true">🔒</span>
+            <p><strong>데이터는 브라우저에만 저장됩니다.</strong> 명단은 서버로 전송되지 않습니다. 디스코드 전송을 누를 때만 웹훅으로 결과가 전달됩니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOCS -->
+      <div class="section" style="padding-bottom:0">
+        <div class="shead reveal">
+          <p class="kicker">Automation</p>
+          <h2>손으로 하던 <em>내전 운영</em>, 전부 자동으로</h2>
+          <p>기존에는 엑셀과 감으로 하던 일을 순서대로 자동화했습니다.</p>
+        </div>
+        <div class="doc-grid">
+          <div class="mini reveal">
+            <h3>① 팀 밸런싱</h3>
+            <p>티어·RR·최고 티어를 합산한 MMR로 <b>스네이크 드래프트 + 국소 최적화</b>를 돌려 팀 평균 차이를 최소화합니다. 26번의 랜덤 재시도로 최적 조합을 찾습니다.</p>
+          </div>
+          <div class="mini reveal">
+            <h3>② 대진표 자동 생성</h3>
+            <p>팀 수에 맞춰 <b>2·4·8강 브래킷</b>을 만들고, 인원이 모자라면 <b>부전승(BYE)</b>을 자동 배치합니다. 스코어를 넣으면 승자가 다음 라운드로 즉시 진출합니다.</p>
+          </div>
+          <div class="mini reveal">
+            <h3>③ 포인트 정산</h3>
+            <p><code>경기 수 × 150P + 승리 × 70P</code> 규칙으로 전원을 자동 집계합니다. 규칙 값은 상단에서 바로 수정할 수 있습니다.</p>
+          </div>
+          <div class="mini reveal">
+            <h3>④ 디스코드 전송</h3>
+            <p>웹훅 URL만 넣으면 팀 구성·평균 MMR·포인트 순위가 임베드 카드로 채널에 올라갑니다. 복사·붙여넣기 없이 끝.</p>
+          </div>
+          <div class="mini reveal">
+            <h3>⑤ 자동 저장 · 링크 공유</h3>
+            <p>모든 입력은 브라우저에 자동 저장됩니다. <b>공유 링크</b> 하나로 다른 운영진에게 같은 상태를 그대로 넘길 수 있습니다.</p>
+          </div>
+          <div class="mini reveal">
+            <h3>⑥ CSV 내보내기</h3>
+            <p>팀 명단과 포인트 정산 결과를 엑셀용 CSV로 저장합니다. 시즌 누적 관리에 그대로 붙여넣으세요.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="shead reveal">
+          <p class="kicker">MMR table</p>
+          <h2>MMR <em>산정 기준</em></h2>
+          <p>현재 티어 기본값 + RR(0~100)로 계산합니다. 최고 티어는 별도로 반영됩니다.</p>
+        </div>
+        <div class="prose" style="max-width:none;margin-top:24px">
+          <table>
+            <thead><tr><th>티어</th><th>기본 MMR</th><th>티어</th><th>기본 MMR</th><th>티어</th><th>기본 MMR</th></tr></thead>
+            <tbody>
+              <tr><td>아이언 1</td><td>100</td><td>골드 1</td><td>1,000</td><td>초월자 1</td><td>1,900</td></tr>
+              <tr><td>브론즈 1</td><td>400</td><td>플래티넘 1</td><td>1,300</td><td>불멸 1</td><td>2,200</td></tr>
+              <tr><td>실버 1</td><td>700</td><td>다이아 1</td><td>1,600</td><td>레디언트</td><td>2,500</td></tr>
+            </tbody>
+          </table>
+          <p class="hint">같은 티어 안에서 디비전마다 +100, RR 1당 +1로 계산합니다. 예) 골드 2 · 40RR = 1,100 + 40 = 1,140 MMR.</p>
+        </div>
+      </div>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="shead reveal">
+          <p class="kicker">FAQ</p>
+          <h2>밸런서 사용법 <em>한눈에</em></h2>
+        </div>
+        <div class="faq">
+          <details open>
+            <summary>팀은 어떤 기준으로 나뉘나요?</summary>
+            <div class="faq__a"><p>현재 티어 MMR과 최고 티어 MMR을 설정한 비중(기본 60:40)으로 합산한 뒤, 상위부터 번갈아 배치하는 스네이크 드래프트로 초기 팀을 만들고, 팀 평균 차이가 줄어들도록 선수를 교환하는 최적화를 반복합니다. 무작위 재시도 26회 중 가장 균형 잡힌 결과를 사용합니다.</p></div>
+          </details>
+          <details>
+            <summary>팀 인원이 딱 나누어떨어지지 않으면요?</summary>
+            <div class="faq__a"><p>자동으로 균등 배분됩니다. 예를 들어 11명을 2팀으로 나누면 한 팀이 6명, 다른 팀이 5명이 됩니다. 정확히 5:5를 원하면 '참가' 토글로 한 명을 제외하세요.</p></div>
+          </details>
+          <details>
+            <summary>부전승(BYE)은 어떻게 처리되나요?</summary>
+            <div class="faq__a"><p>팀 수가 2의 거듭제곱이 아닐 때(예: 3팀·5팀) 자동으로 부전승 자리를 만들고 해당 팀을 다음 라운드로 바로 올립니다. 부전승은 경기 수에 포함되지 않아 포인트가 과다 지급되지 않습니다.</p></div>
+          </details>
+          <details>
+            <summary>입력한 명단이 저장되나요?</summary>
+            <div class="faq__a"><p>네. 브라우저의 로컬 저장소에 자동 저장되어 새로고침해도 유지됩니다. 다른 기기로 옮기려면 '공유 링크 복사'를 사용하세요. 서버에는 아무것도 저장되지 않습니다.</p></div>
+          </details>
+          <details>
+            <summary>디스코드 웹훅은 어떻게 만드나요?</summary>
+            <div class="faq__a"><p>디스코드 채널 우클릭 → 채널 편집 → 연동 → 웹훅 → 새 웹훅 → URL 복사 순서로 만들 수 있습니다. 붙여넣고 '디스코드로 전송'을 누르면 팀 구성과 포인트가 카드 형태로 전송됩니다.</p></div>
+          </details>
+          <details>
+            <summary>휴대폰에서도 쓸 수 있나요?</summary>
+            <div class="faq__a"><p>가능합니다. 모바일에서는 명단 표가 가로로 스크롤되고, 팀 카드와 대진표도 화면 폭에 맞춰 표시됩니다. 다만 많은 인원을 한 번에 입력할 때는 PC를 권장합니다.</p></div>
+          </details>
+        </div>
+      </div>
+
+      <div class="cta" style="margin-top:clamp(40px,6vw,64px)">
+        <div>
+          <p class="kicker">Next scrim</p>
+          <h2>팀 짰으면,<br>이제 붙어야죠</h2>
+          <p>대진표까지 나왔습니다. 디스코드에서 음성 채널 만들고 바로 시작하세요.</p>
+        </div>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="https://discord.gg/76CTQ5Cpb9" target="_blank" rel="noopener">디스코드 참가하기</a>
+          <a class="btn btn--ghost" href="duo.html">듀오 찾기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a class="brand" href="index.html">
+          <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M2 3h9.4l8.7 21.4H11L2 3Z" fill="currentColor"/>
+            <path d="M18.6 3H30l-5.4 13.4L18.6 3Z" fill="currentColor"/>
+          </svg>
+          <span class="brand__text"><strong>대깨발</strong><small>대가리 깨져도 발로란트</small></span>
+        </a>
+        <p>발로란트 친목 디스코드 서버. 듀오, 5인 파티, 커스텀 내전을 함께 즐기는 사람들의 공간입니다.</p>
+      </div>
+      <div>
+        <h4>MENU</h4>
+        <ul>
+          <li><a href="index.html#about">서버 소개</a></li>
+          <li><a href="duo.html">듀오 찾기</a></li>
+          <li><a href="balancer.html">내전 밸런서</a></li>
+          <li><a href="season.html">시즌 허브</a></li>
+          <li><a href="events.html">대회 · 이벤트</a></li>
+          <li><a href="rules.html">서버 규칙</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>GUIDES</h4>
+        <ul>
+          <li><a href="blog/index.html">가이드 전체</a></li>
+          <li><a href="blog/discord-server-guide.html">디스코드 서버 고르기</a></li>
+          <li><a href="blog/beginner-guide.html">초보자 시작 가이드</a></li>
+          <li><a href="blog/ranked-terms.html">티어 용어 정리</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>JOIN</h4>
+        <ul>
+          <li><a href="https://discord.gg/76CTQ5Cpb9" target="_blank" rel="noopener">디스코드 초대 링크</a></li>
+          <li><a href="index.html#keywords">키워드 바로가기</a></li>
+          <li><a href="sitemap.xml">사이트맵</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© <span data-year>2026</span> 대가리 깨져도 발로란트. 대가리 깨져도 발로란트는 Riot Games의 공식 제품이 아니며, Riot Games 또는 VALORANT와 제휴·후원 관계가 없습니다. VALORANT는 Riot Games, Inc.의 상표입니다.</p>
+      <p>Made for players, by players.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/season-store.js" defer></script>
+<script src="assets/js/balancer.js" defer></script>
+</body>
+</html>
