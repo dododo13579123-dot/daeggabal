@@ -413,8 +413,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   font-size: clamp(38px, 4.5vw, 55px);
   line-height: 1.2;
   letter-spacing: -0.055em;
-  transform: skewX(-3deg);
-  transform-origin: left center;
   margin-top: 8px;
 }
 .poster__title em {
@@ -426,9 +424,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .poster__title .stroke {
   color: transparent;
   -webkit-text-fill-color: #0b0b10;
-  -webkit-text-stroke: 1.4px var(--bone);
-  letter-spacing: -0.02em;
-  font-weight: 800;
+  -webkit-text-stroke: 1.2px var(--bone);
+  letter-spacing: 0.02em;
+  font-weight: 500;
 }
 .poster__bottom {
   position: relative;
