@@ -424,9 +424,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   text-shadow: 5px 5px 0 rgba(140, 13, 24, 0.45);
 }
 .poster__title .stroke {
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1.6px var(--bone);
+  color: var(--bone);
+  -webkit-text-fill-color: var(--bone);
+  -webkit-text-stroke: 0;
 }
 .poster__bottom {
   position: relative;
