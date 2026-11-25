@@ -1,7 +1,11 @@
 # 대가리 깨져도 발로란트 (대깨발) — 공식 사이트
 
+- **라이브:** https://dododo13579123-dot.github.io/daeggabal/
+- **저장소:** https://github.com/dododo13579123-dot/daeggabal
+
 발로란트 친목 디스코드 서버 **대깨발**의 랜딩 페이지 + 내전 운영 도구 모음입니다.
 정적 HTML/CSS/JS만 사용하며, 서버·DB·빌드 없이 어디서든 배포할 수 있습니다.
+현재 GitHub Pages(`main` 브랜치 루트)로 자동 배포됩니다.
 
 ## 구성
 
